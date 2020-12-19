@@ -36,8 +36,6 @@ validateConfirmPassword : check('confirmPassword')
 
 
 
-
-
 //const { check,sanitizeBody } = require('express-validator');
 
 //module.exports = (req, res, next)=>{

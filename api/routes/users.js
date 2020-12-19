@@ -56,7 +56,8 @@ router.post('/login', (req, res, next) => {
                     expiresIn: "1h"
                 }
                 );
-                return res.status(200).json({
+                return res.redirect('/home')
+                res.status(200).json({
                     message: 'Auth successfull',
                     token: token
                 });
@@ -67,6 +68,7 @@ router.post('/login', (req, res, next) => {
         })
     })
 })
+
 
 
 
@@ -135,9 +137,11 @@ router.post('/signup', (req, res, next) => {
                     .save()
                     .then(result => {
                         console.log(result);
-                        res.status(201).json({
-                            message: 'User created'
-                        });
+                        return res.redirect('/users/registered');
+                       // res.status(201).json({
+                        //    message: 'User created',
+                         //   url: "http://localhost:3000/users/login"     
+                        //});
                     })
                     .catch(err => {
                         console.log(err);
