@@ -59,6 +59,13 @@ app.get('/users/registered', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/registered.html'));
 })
 
+app.get('/users/error_page1', (req, res, next) => {
+    res.sendFile(path.join(__dirname + '/error_page1.html'));
+})
+
+app.get('/users/error_page2', (req, res, next) => {
+    res.sendFile(path.join(__dirname + '/error_page2.html'));
+})
 
 app.get('/home', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/home page.html'));
