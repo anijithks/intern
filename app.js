@@ -3,29 +3,7 @@ const app =express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-//const {validationResult} = require('express-validator');
-//const { validateConfirmPassword } = require('./api/middleware/validation-rule') ;
-
 const path = require('path');
-
-//require('dotenv').config();
-
-//const MongoClient = require('mongodb').MongoClient;
-//const uri = "mongodb+srv://<username>:<password>@node-shop.00fuy.mongodb.net/<dbname>?retryWrites=true&w=majority";
-//const client = new MongoClient(uri, { useNewUrlParser: true });
-//client.connect(err => {
-  //const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  //client.close();
-//});
-
-
-
-
-
-
-
-
 
 
 const productRoutes = require('./api/routes/products');
@@ -49,6 +27,9 @@ app.get('/users/login', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/login.html'));
 });
 
+app.get('/home', (req, res, next) => {
+    res.sendFile(path.join(__dirname + '/home page.html'));
+})
 
 app.get('/users/signup', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/signup.html'));
@@ -67,9 +48,6 @@ app.get('/users/error_page2', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/error_page2.html'));
 })
 
-app.get('/home', (req, res, next) => {
-    res.sendFile(path.join(__dirname + '/home page.html'));
-})
 
 
 
@@ -91,16 +69,6 @@ app.use((req, res, next) => {
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/users', userRoutes);
-//app.use((req, res, next) => {
- //   res.status(200).json({
-  //      message: 'It works!',
-   // })
-//})
-//app.use((req, res, next) => {
-//    const error = new Error('Not found');
- //   error.status=404;
-//    next(error);
-//})
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
