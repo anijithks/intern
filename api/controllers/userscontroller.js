@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 exports.user_get_all = (req, res, next) =>{
     User.find().exec().then(docs => {
@@ -48,10 +49,14 @@ exports.user_login = (req, res, next) => {
                     expiresIn: "1h"
                 }
                 );
+                return res.status(200).json({
+                    message: 'Auth successfull',
+                    token: token
+                });
                 return res.redirect('/home')
             }
             res.status(401).json({
-                message: 'Auth failed'
+                message: 'Auuuth failed'
             })
         })
     })
@@ -94,10 +99,6 @@ exports.user_signUp = (req, res, next) => {
                     .then(result => {
                         console.log(result);
                         return res.redirect('/users/registered');
-                       // res.status(201).json({
-                        //    message: 'User created',
-                         //   url: "http://localhost:3000/users/login"     
-                        //});
                     })
                     .catch(err => {
                         console.log(err);

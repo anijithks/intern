@@ -4,11 +4,16 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config();
 
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 const userRoutes = require('./api/routes/users');
+const Userscontroller = require('./api/controllers/userscontroller.js');
+
+
+
 
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));
@@ -23,7 +28,7 @@ mongoose.Promise = global.Promise;
 
 
 
-app.get('/users/login', (req, res, next) => {
+app.get('/login', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/login.html'));
 });
 
@@ -31,7 +36,7 @@ app.get('/home', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/home page.html'));
 })
 
-app.get('/users/signup', (req, res, next) => {
+app.get('/signup', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/signup.html'));
 });
 
@@ -48,6 +53,11 @@ app.get('/users/error_page2', (req, res, next) => {
     res.sendFile(path.join(__dirname + '/error_page2.html'));
 })
 
+
+
+
+app.post('/login', Userscontroller.user_login);
+app.post('/signup', Userscontroller.user_signUp);
 
 
 
